@@ -39,4 +39,12 @@ $(document).ready(function(){
         shell.value += $("#command").val() + "\n";
         send({type: "run", command: command});
     });
+
+    var command = document.getElementById("command");
+    command.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("run").click();
+        }
+    });
 });

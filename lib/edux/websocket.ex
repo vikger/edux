@@ -35,9 +35,12 @@ defmodule Edux.Websocket do
     {:reply, {:text, Jason.encode!(%{"type" => "pong"})}, state}
   end
 
-  def process_message(%{"type" => "compile", "source" => source}, state) do
+  def process_message(%{"type" => "compile", "source" => source}, %{pid: pid} = state) do
     Logger.info("compile #{source}")
-    {:reply, {:text, "OK"}, state}
+    filename = "tmp.ex" # make dynamic
+    File.write(filename, source)
+    Edux.Shell.command(pid, "c(\"#{filename}\")\n")
+    {:ok, state}
   end
 
   def process_message(%{"type" => "run", "command" => command}, %{pid: pid} = state) do

@@ -10,6 +10,7 @@ defmodule Edux.Shell do
   end
 
   def init(websocket) do
+#    dir = Path.join(:code.priv_dir(:edux), "tmp")
     port = Port.open({:spawn, "iex"}, [:binary])
     {:ok, %{websocket: websocket, port: port}}
   end
