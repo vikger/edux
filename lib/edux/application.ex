@@ -8,9 +8,10 @@ defmodule Edux.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      Edux.SessionManager,
       Plug.Cowboy.child_spec(
         scheme: :http,
-        plug: HeckMeck.Router,
+        plug: Edux.Router,
         options: [port: 5555, dispatch: dispatch()]
       )
     ]

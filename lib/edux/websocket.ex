@@ -3,19 +3,18 @@ defmodule Edux.Websocket do
 
   @behaviour :cowboy_websocket
 
-
   @impl :cowboy_websocket
   def init(req, opts) do
     Logger.info("[websocket] init req => #{inspect(req)}")
-    {:cowboy_websocket, req, opts}
+    {:cowboy_websocket, req, opts, %{idle_timeout: :infinity}}
   end
 
   @impl :cowboy_websocket
   def websocket_init(_) do
-    Logger.info("[websocket] init")
+    Logger.info("[websocket] init #{inspect(self())}")
     {:ok, pid} = Edux.Shell.start_link(self())
-    state = %{pid: pid}
-    {:ok, state}
+    session_id = Edux.SessionManager.new(self())
+    {:ok, %{pid: pid, session_id: session_id}}
   end
 
   @impl :cowboy_websocket
@@ -27,7 +26,7 @@ defmodule Edux.Websocket do
 
   @impl :cowboy_websocket
   def websocket_info(message, state) do
-    Logger.info("Websocket info #{inspect message}")
+    Logger.info("Websocket info #{inspect(message)}")
     {:reply, {:text, message}, state}
   end
 
@@ -35,12 +34,15 @@ defmodule Edux.Websocket do
     {:reply, {:text, Jason.encode!(%{"type" => "pong"})}, state}
   end
 
-  def process_message(%{"type" => "compile", "source" => source}, %{pid: pid} = state) do
+  def process_message(
+        %{"type" => "compile", "source" => source},
+        %{pid: pid, session_id: session_id} = state
+      ) do
     Logger.info("compile #{source}")
-    filename = "tmp.ex" # make dynamic
+    filename = "tmp_#{session_id}.ex"
     File.write(filename, source)
     Edux.Shell.command(pid, "c(\"#{filename}\")\n")
-    {:ok, state}
+    {:reply, {:text, "c(\"<module>.ex\")\n"}, state}
   end
 
   def process_message(%{"type" => "run", "command" => command}, %{pid: pid} = state) do

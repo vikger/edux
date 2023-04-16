@@ -20,7 +20,6 @@ defmodule Edux.MixProject do
 
   defp deps do
     [
-      {:gen_state_machine, "~> 2.0"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.0"}
     ]
