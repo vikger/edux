@@ -6,9 +6,17 @@
     <script type="text/javascript" src="js/index.js"></script>
   </head>
   <body>
-    <div><textarea id="source" cols="50" rows="20"></textarea></div>
-    <div><button id="compile" value="Compile">Compile</button></div>
-    <div><input type="text" id="command"/><button id="run">Run</button></div>
-    <div><textarea readonly id="shell" cols="50" rows="20"></textarea>
+    <table width="100%">
+      <tr>
+        <td width="50%">
+          <div><button id="compile" value="Compile">Compile</button></div>
+          <div><textarea id="source" cols="60" rows="30"></textarea></div>
+        </td>
+        <td>
+          <div><input type="text" id="command" size="60"/><button id="run">Run</button></div>
+          <div><textarea readonly id="shell" cols="60" rows="30"></textarea></div>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
