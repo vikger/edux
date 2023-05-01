@@ -1,22 +1,26 @@
 <html>
   <head>
+    <title>Edux</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <link rel="stylesheet" href="css/main.css"/>
   </head>
   <body>
+    <h1>Edux - an Elixir shell for education</h1>
     <table width="100%">
       <tr>
         <td width="50%">
-          <div><button id="compile" value="Compile">Compile</button></div>
-          <div><textarea id="source" cols="60" rows="30"></textarea></div>
+          <div align="center"><button id="compile" class="compile" value="Compile">Compile</button></div>
+          <div><textarea id="source"></textarea></div>
         </td>
         <td>
-          <div><input type="text" id="command" size="60"/><button id="run">Run</button></div>
-          <div><textarea readonly id="shell" cols="60" rows="30"></textarea></div>
+          <div><input type="text" id="command"/><button id="run" class="run">Run</button></div>
+          <div><textarea readonly id="shell"></textarea></div>
         </td>
       </tr>
     </table>
+    <p class="footer"><a href="https://github.com/vikger/edux" target="_blank">Github project page</a></p>
   </body>
 </html>
