@@ -17,7 +17,7 @@ defmodule Edux.SessionManager do
 
   def handle_call({:new, pid}, _from, state) do
     Process.monitor(pid)
-    session_id = :rand.uniform(100_000)
+    session_id = UUID.uuid4()
     Logger.info("New session #{session_id}")
     {:reply, session_id, Map.put(state, pid, session_id)}
   end
