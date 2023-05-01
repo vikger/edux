@@ -28,6 +28,8 @@ FROM elixir:alpine AS release
 
 WORKDIR /app
 
+ENV DOCKER_RELEASE=true
+
 COPY --from=build /app/_build/prod/rel/edux ./
 
 ENTRYPOINT [ "/app/bin/edux", "start" ]

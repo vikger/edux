@@ -1,6 +1,8 @@
 defmodule Edux.Shell do
   use GenServer
 
+  require Logger
+
   def start_link(websocket) do
     GenServer.start_link(__MODULE__, websocket)
   end
@@ -26,7 +28,7 @@ defmodule Edux.Shell do
   end
 
   def handle_info(msg, state) do
-    IO.inspect(msg)
+    Logger.warning("Unexpected message received in shell: #{inspect(msg)}")
     {:noreply, state}
   end
 end
