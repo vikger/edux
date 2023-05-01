@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  edux:
+    image: edux
+    build: .
+
+    init: true
+    restart: unless-stopped
+
+    ports:
+    - 5555:5555
