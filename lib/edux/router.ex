@@ -12,7 +12,6 @@ defmodule Edux.Router do
 
   plug(:match)
   plug(:dispatch)
-  # plug ETag.Plug
 
   get "/" do
     priv_dir = :code.priv_dir(:edux)
