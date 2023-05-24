@@ -8,19 +8,21 @@
     <link rel="stylesheet" href="css/main.css"/>
   </head>
   <body>
-    <h1>Edux - an Elixir shell for education</h1>
-    <table width="100%">
-      <tr>
-        <td width="50%">
-          <div align="center"><button id="compile" class="compile" value="Compile">Compile</button></div>
-          <div><textarea id="source"></textarea></div>
-        </td>
-        <td>
-          <div><input type="text" id="command"/><button id="run" class="run">Run</button></div>
-          <div><textarea readonly id="shell"></textarea></div>
-        </td>
-      </tr>
-    </table>
-    <p class="footer"><a href="https://github.com/vikger/edux" target="_blank">Github project page</a></p>
+    <div style="height: 5%">
+      <h1>Edux - an Elixir shell for education</h1>
+    </div>
+    <div class="main-frame">
+      <div class="compile-frame">
+        <div class="compile-button"><button id="compile" class="compile" value="Compile">Compile</button></div>
+        <div><textarea id="source" class="source-textarea"></textarea></div>
+      </div>
+      <div class="run-frame">
+        <div class="run-button"><input type="text" id="command"/><button id="run" class="run">Run</button></div>
+        <div class="shell-textarea"><textarea readonly id="shell"></textarea></div>
+      </div>
+    </div>
+    <div style="height: 5%">
+      <p class="footer"><a href="https://github.com/vikger/edux" target="_blank">Github project page</a></p>
+    </div>
   </body>
 </html>
