@@ -35,7 +35,7 @@ defmodule Edux.SessionManager do
   end
 
   def handle_info(other, state) do
-    Logger.warn("Unexpected message in SessionManager: #{other}")
+    Logger.warning("Unexpected message in SessionManager: #{other}")
     {:noreply, state}
   end
 end

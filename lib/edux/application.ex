@@ -9,8 +9,6 @@ defmodule Edux.Application do
   def start(_type, _args) do
     if System.get_env("DOCKER_RELEASE") == "true" do
       reset_env()
-    else
-      :ok
     end
 
     children = [
@@ -38,18 +36,18 @@ defmodule Edux.Application do
 
   defp reset_env() do
     env = %{
-      "BINDIR" => "/usr/local/lib/erlang/erts-13.2/bin",
-      "ELIXIR_VERSION" => "1.14.4",
+      "BINDIR" => System.get_env("BINDIR"),
+      "ELIXIR_VERSION" => System.get_env("ELIXIR_VERSION"),
       "EMU" => "beam",
       "HOME" => "/root",
-      "HOSTNAME" => "8eb5104e621a",
+      "HOSTNAME" => System.get_env("HOSTNAME"),
       "LANG" => "C.UTF-8",
-      "OTP_VERSION" => "25.3",
+      "OTP_VERSION" => System.get_env("OTP_VERSION"),
       "PATH" =>
         "/usr/local/lib/erlang/erts-13.2/bin:/usr/local/lib/erlang/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
       "PROGNAME" => "erl",
       "PWD" => "/",
-      "REBAR3_VERSION" => "3.20.0",
+      "REBAR3_VERSION" => System.get_env("REBAR3_VERSION"),
       "ROOTDIR" => "/usr/local/lib/erlang",
       "SHLVL" => "3",
       "TERM" => "xterm"
