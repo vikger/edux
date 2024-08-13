@@ -22,7 +22,8 @@ defmodule Edux.MixProject do
     [
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.0"},
-      {:uuid, "~> 1.1"}
+      {:uuid, "~> 1.1"},
+      {:mock, "~> 0.3.0", only: :test}
     ]
   end
 end

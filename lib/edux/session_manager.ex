@@ -22,6 +22,10 @@ defmodule Edux.SessionManager do
     {:reply, session_id, Map.put(state, pid, session_id)}
   end
 
+  def handle_call(:get_state, _from, state) do
+    {:reply, state, state}
+  end
+
   def handle_info({:DOWN, _ref, :process, pid, _reason}, state) do
     case Map.get(state, pid) do
       nil ->
@@ -37,5 +41,11 @@ defmodule Edux.SessionManager do
   def handle_info(other, state) do
     Logger.warning("Unexpected message in SessionManager: #{other}")
     {:noreply, state}
+  end
+
+  # Helper functions for testability
+
+  def get_state do
+    GenServer.call(__MODULE__, :get_state)
   end
 end

@@ -12,12 +12,12 @@ defmodule Edux.Shell do
   end
 
   def init(websocket) do
-    port = Port.open({:spawn, "iex"}, [:binary])
+    port = __MODULE__.open_shell()
     {:ok, %{websocket: websocket, port: port}}
   end
 
   def handle_cast({:command, command}, state) do
-    Port.command(state.port, command)
+    __MODULE__.shell_command(state.port, command)
     {:noreply, state}
   end
 
@@ -29,5 +29,15 @@ defmodule Edux.Shell do
   def handle_info(msg, state) do
     Logger.warning("Unexpected message received in shell: #{inspect(msg)}")
     {:noreply, state}
+  end
+
+  # Helper functions for testability
+
+  def open_shell do
+    Port.open({:spawn, "iex"}, [:binary])
+  end
+
+  def shell_command(port, command) do
+    Port.command(port, command)
   end
 end
