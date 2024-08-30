@@ -6,12 +6,12 @@ function send(message) {
 };
 
 function connect() {
-    const hostname = document.location.href.split("/", 3)[2];
+    const hostname = document.location.href.split("/").slice(2).join("/");
     if (ws) {
         ws.close();
     }
     var schema = (location.href.split(":")[0] == "https") ? "wss" : "ws";
-    ws = new WebSocket(schema + "://" + hostname + "/ws");
+    ws = new WebSocket(schema + "://" + hostname + "ws");
     console.log(ws)
     ws.onopen = function(){
 //        send({type: "ping"})
